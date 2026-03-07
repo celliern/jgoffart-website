@@ -2,92 +2,150 @@
 
 {% block content %}
 <header>
-  <a class="image avatar">
-    <img src="{{ get_url(path='avatar.webp') }}" alt="avatar" />
-  </a>
   
-  <h1>Jeanne Goffart</h1>
-  
-  <position>Research Scientist</position>
+  {% if config.extra.avatar %}
+  <a class="image avatar"><img src="{{ get_url(path=config.extra.avatar) }}" alt="avatar" /></a>
+  {% endif %}
+
+  <h1>{{ config.extra.name }}</h1>
+
+  {% if config.extra.position %}
+  <position style="font-size:1.10rem;">{{ config.extra.position }}</position>
   <br>
-  <a href="#">Lorem ipsum university</a>
+  {% endif %}
+  {% if config.extra.university %}
+  <a href="{{ config.extra.university_url | default(value='#') }}" rel="noopener"><autocolor>{{ config.extra.university }}</autocolor></a>
   <br>
-  <email>jeanne.goffart [at] example.com</email>
-  
+  {% endif %}
+  {% if config.extra.email %}
+  <email>{{ config.extra.email }}</email>
+  {% endif %}
+
   <br>
   <br>
   <div class="social-icons">
-    <a href="https://scholar.google.com/citations?user=Vm_NHnYAAAAJ&hl=fr" title="Google Scholar" target="_blank" rel="noopener">
-      <i class="ai ai-google-scholar"></i>
-    </a>
-    <a href="{{ get_url(path='cv.pdf') }}" title="CV" target="_blank" rel="noopener">
-      <i class="ai ai-cv"></i>
-    </a>
-    <a href="https://fr.linkedin.com/in/jeanne-goffart-41217661" title="LinkedIn" target="_blank" rel="noopener">
-      <i class="fab fa-linkedin"></i>
-    </a>
+  {% for social in config.extra.social %}
+  <a style="margin: 0 5px 0 0" href="{% if social.is_local %}{{ get_url(path=social.url) }}{% else %}{{ social.url }}{% endif %}" title="{{ social.name }}" target="_blank" rel="noopener">
+    {% if social.icon_type == "academicons" %}
+    <i class="ai ai-{{ social.icon }}" style="font-size:1.2rem"></i>
+    {% else %}
+    <i class="fab fa-{{ social.icon }}"></i>
+    {% endif %}
+  </a>
+  {% endfor %}
   </div>
   <br>
-</header>
 
+</header>
 <section>
-  <h2>About me</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-  
-  <h2>Research Interests</h2>
-  <ul>
-    <li>Lorem ipsum dolor sit amet</li>
-    <li>Consectetur adipiscing elit</li>
-    <li>Sed do eiusmod tempor</li>
-  </ul>
-  
-  <h2 id="publications">Publications</h2>
-  <div class="publications-list">
-    {% set pub_section = get_section(path="publications/_index.md") %}
-    {% for page in pub_section.pages %}
-    <div class="pub-item">
-      <div class="pub-image">
-        {% if page.extra.image %}
-        <img src="{{ get_url(path=page.extra.image) }}" alt="" class="teaser img-fluid">
-        {% endif %}
-      </div>
-      <div class="pub-content">
-        <div class="title">
-          {% if page.extra.url %}
-          <a href="{{ page.extra.url }}">{{ page.title }}</a>
-          {% else %}
-          {{ page.title }}
-          {% endif %}
-        </div>
-        <div class="author">{{ page.extra.year }}</div>
-        <div class="periodical">
-          <em>{{ page.extra.journal }}</em>
-        </div>
-        <div class="links">
-          {% if page.extra.url %}
-          <a href="{{ page.extra.url }}" class="btn" target="_blank" rel="noopener">Link</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    {% endfor %}
+
+{{ section.content | safe }}
+
+{# Working Papers Section #}
+{% set wp_section = get_section(path="working-papers/_index.md") %}
+{% if wp_section.pages %}
+<h2 id="working_papers" style="margin: 2px 0px -15px;">Working Papers</h2>
+
+<div class="publications">
+<ol class="bibliography">
+
+{% for page in wp_section.pages %}
+
+<li>
+<div class="pub-row">
+  <div class="col-sm-3 abbr" style="position: relative;padding-right: 15px;padding-left: 15px;">
+    {% if page.extra.image %} 
+    <img src="{{ get_url(path=page.extra.image) }}" class="teaser img-fluid z-depth-1" style="width=100;height=40%">
+    {% endif %}
+    {% if page.extra.badge %} 
+    <abbr class="badge">{{ page.extra.badge }}</abbr>
+    {% endif %}
   </div>
+  <div class="col-sm-9" style="position: relative;padding-right: 15px;padding-left: 20px;">
+      <div class="title"><a href="{{ page.extra.url | default(value='#') }}">{{ page.title }}</a></div>
+      <div class="author">{{ page.extra.authors | default(value=page.extra.year) }}</div>
+      <div class="periodical"><em>{{ page.extra.journal }}</em>
+      </div>
+    <div class="links">
+      {% if page.extra.url %} 
+      <a href="{{ page.extra.url }}" class="btn btn-sm z-depth-0" role="button" target="_blank" style="font-size:12px;">PDF</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</li>
+
+<br>
+
+{% endfor %}
+
+</ol>
+</div>
+{% endif %}
+
+{# Work in Progress Section #}
+{% set wip_section = get_section(path="work-in-progress/_index.md") %}
+{% if wip_section.pages %}
+<h2 id="work-in-progress">Work in Progress</h2>
+
+<ul>
+{% for page in wip_section.pages %}
+<li><strong>{{ page.title }}</strong> {{ page.content | safe }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Publications Section #}
+{% set pub_section = get_section(path="publications/_index.md") %}
+{% if pub_section.pages %}
+<h2 id="publications" style="margin: 2px 0px -15px;">Publications</h2>
+
+<div class="publications">
+<ol class="bibliography">
+
+{% for page in pub_section.pages %}
+
+<li>
+<div class="pub-row">
+  <div class="col-sm-3 abbr" style="position: relative;padding-right: 15px;padding-left: 15px;">
+    {% if page.extra.image %} 
+    <img src="{{ get_url(path=page.extra.image) }}" class="teaser img-fluid z-depth-1" style="width=100;height=40%">
+    {% endif %}
+    {% if page.extra.badge %} 
+    <abbr class="badge">{{ page.extra.badge }}</abbr>
+    {% endif %}
+  </div>
+  <div class="col-sm-9" style="position: relative;padding-right: 15px;padding-left: 20px;">
+      <div class="title"><a href="{{ page.extra.url | default(value='#') }}">{{ page.title }}</a></div>
+      <div class="author">{{ page.extra.authors | default(value=page.extra.year) }}</div>
+      <div class="periodical"><em>{{ page.extra.journal }}</em>
+      </div>
+    <div class="links">
+      {% if page.extra.url %} 
+      <a href="{{ page.extra.url }}" class="btn btn-sm z-depth-0" role="button" target="_blank" style="font-size:12px;">PDF</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</li>
+
+<br>
+
+{% endfor %}
+
+</ol>
+</div>
+{% endif %}
+
+{% set other_content = get_page(path="other.md") %}
+{% if other_content %}
+{{ other_content.content | safe }}
+{% endif %}
+
+<br>
+
+<footer>
   
-  <h2>Working Papers</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  </p>
-  
-  <h2>Other</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  </p>
-  
-  <br>
-  <footer>
-    <small>Powered by <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a> and the <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small>
-  </footer>
+</footer>
 </section>
 {% endblock %}

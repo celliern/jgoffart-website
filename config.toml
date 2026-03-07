@@ -4,3 +4,35 @@ description = "Personal academic website"
 generate_feeds = false
 build_search_index = false
 compile_sass = false
+
+[extra]
+name = "Jeanne Goffart"
+position = "Research Scientist"
+university = "Lorem ipsum university"
+university_url = "#"
+email = "jeanne.goffart [at] example.com"
+avatar = "avatar.webp"
+
+[[extra.social]]
+name = "Google Scholar"
+url = "https://scholar.google.com/citations?user=Vm_NHnYAAAAJ&hl=fr"
+icon = "google-scholar"
+icon_type = "academicons"
+
+[[extra.social]]
+name = "CV"
+url = "cv.pdf"
+icon = "cv"
+icon_type = "academicons"
+is_local = true
+
+[[extra.social]]
+name = "LinkedIn"
+url = "https://fr.linkedin.com/in/jeanne-goffart-41217661"
+icon = "linkedin"
+icon_type = "fontawesome"
+
+[extra.footer]
+powered_by = "Zola"
+theme = "Minimal Light"
+theme_url = "https://github.com/yaoyao-liu/minimal-light"
