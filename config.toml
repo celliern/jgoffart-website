@@ -1,4 +1,4 @@
-base_url = "https://jeanne-goffart.example.com"
+base_url = "https://celliern.github.io/jgoffart-website/"
 title = "Jeanne Goffart"
 description = "Personal academic website"
 generate_feeds = false
