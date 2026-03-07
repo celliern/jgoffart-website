@@ -1,0 +1,25 @@
+# Build output
+public/
+
+# Environment variables
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# mise
+.ruff_cache/
+.openspec/
+.opencode/

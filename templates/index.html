@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+  <a class="image avatar">
+    <img src="{{ get_url(path='avatar.webp') }}" alt="avatar" />
+  </a>
+  
+  <h1>Jeanne Goffart</h1>
+  
+  <position>Research Scientist</position>
+  <br>
+  <a href="#">Lorem ipsum university</a>
+  <br>
+  <email>jeanne.goffart [at] example.com</email>
+  
+  <br>
+  <br>
+  <div class="social-icons">
+    <a href="https://scholar.google.com/citations?user=Vm_NHnYAAAAJ&hl=fr" title="Google Scholar" target="_blank" rel="noopener">
+      <i class="ai ai-google-scholar"></i>
+    </a>
+    <a href="{{ get_url(path='cv.pdf') }}" title="CV" target="_blank" rel="noopener">
+      <i class="ai ai-cv"></i>
+    </a>
+    <a href="https://fr.linkedin.com/in/jeanne-goffart-41217661" title="LinkedIn" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+  <br>
+</header>
+
+<section>
+  <h2>About me</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+  
+  <h2>Research Interests</h2>
+  <ul>
+    <li>Lorem ipsum dolor sit amet</li>
+    <li>Consectetur adipiscing elit</li>
+    <li>Sed do eiusmod tempor</li>
+  </ul>
+  
+  <h2 id="publications">Publications</h2>
+  <div class="publications-list">
+    {% set pub_section = get_section(path="publications/_index.md") %}
+    {% for page in pub_section.pages %}
+    <div class="pub-item">
+      <div class="pub-image">
+        {% if page.extra.image %}
+        <img src="{{ get_url(path=page.extra.image) }}" alt="" class="teaser img-fluid">
+        {% endif %}
+      </div>
+      <div class="pub-content">
+        <div class="title">
+          {% if page.extra.url %}
+          <a href="{{ page.extra.url }}">{{ page.title }}</a>
+          {% else %}
+          {{ page.title }}
+          {% endif %}
+        </div>
+        <div class="author">{{ page.extra.year }}</div>
+        <div class="periodical">
+          <em>{{ page.extra.journal }}</em>
+        </div>
+        <div class="links">
+          {% if page.extra.url %}
+          <a href="{{ page.extra.url }}" class="btn" target="_blank" rel="noopener">Link</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <h2>Working Papers</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </p>
+  
+  <h2>Other</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </p>
+  
+  <br>
+  <footer>
+    <small>Powered by <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a> and the <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small>
+  </footer>
+</section>
+{% endblock %}

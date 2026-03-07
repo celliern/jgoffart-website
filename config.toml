@@ -1,0 +1,6 @@
+base_url = "https://jeanne-goffart.example.com"
+title = "Jeanne Goffart"
+description = "Personal academic website"
+generate_feeds = false
+build_search_index = false
+compile_sass = false
