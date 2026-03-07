@@ -1,6 +1,6 @@
 # Jeanne Goffart - Personal Academic Website
 
-A static academic website built with [Zola](https://getzola.org/) and [Tailwind CSS](https://tailwindcss.com/), featuring automatic publication fetching from ORCID.
+A static academic website built with [Zola](https://getzola.org/) and Tailwind CSS via CDN, featuring automatic publication fetching from ORCID.
 
 ## Installation
 
@@ -24,7 +24,6 @@ cp .env.example .env
 # Install dependencies manually
 # - Zola: https://getzola.org/getting-started/installation/
 # - Python 3.13+: https://www.python.org/downloads/
-# - Tailwind CSS: Download from https://github.com/tailwindlabs/tailwindcss/releases
 
 # Set ORCID_ID environment variable
 cp .env.example .env
@@ -58,8 +57,7 @@ export ORCID_ID=0000-0003-1234-8293
 
 ### 4. Edit Styles
 
-- **Tailwind config**: Edit `input.css`
-- Rebuild with: `mise run build`
+- **Custom styles**: Edit `static/style.css` (regular CSS)
 
 ## Building the Site
 
@@ -70,18 +68,14 @@ mise run build-site
 ```
 
 This will:
-1. Build Tailwind CSS
-2. Fetch publications from ORCID
-3. Build the Zola site
+1. Fetch publications from ORCID
+2. Build the Zola site
 
 Output is in the `public/` directory.
 
 ### Individual Commands
 
 ```bash
-# Build Tailwind CSS only
-mise run build
-
 # Fetch publications from ORCID
 mise run fetch-orcid
 
@@ -154,11 +148,8 @@ Connect your GitHub repository to Vercel for automatic deployments.
 ├── scripts/
 │   └── fetch_orcid.py     # ORCID fetching script
 ├── static/
-│   ├── style.css          # Built Tailwind CSS
-│   └── tailwindcss       # Tailwind CLI
-├── content/
+│   └── style.css          # Custom styles (manually edited)
 ├── config.toml            # Zola configuration
-├── input.css             # Tailwind input
 ├── mise.toml             # mise configuration
 └── vercel.json          # Vercel configuration
 ```
