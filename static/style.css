@@ -26,14 +26,16 @@
 
 /* Base styles matching reference site */
 body {
-  font-family: 'Crimson Pro', Georgia, serif;
+  font-family: "Crimson Pro", Georgia, serif;
   font-size: 16px;
   line-height: 1.5;
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .wrapper {
@@ -46,7 +48,7 @@ header {
   width: 232px;
   float: left;
   position: fixed;
-  padding-top: 4.0em;
+  padding-top: 4em;
   text-align: center;
 }
 
@@ -60,7 +62,7 @@ header .image {
 header .image.avatar {
   border-radius: 100%;
   margin: 0 0 1em 0;
-  width: 8.00em;
+  width: 8em;
 }
 
 header .image.avatar img {
@@ -92,7 +94,7 @@ header a:hover {
 }
 
 header email {
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: "Ubuntu Mono", monospace;
   font-size: 14px;
   color: var(--secondary-color);
 }
@@ -129,7 +131,7 @@ header email {
   .social-icons a {
     color: #3eb7f0 !important;
   }
-  
+
   .social-icons a:hover {
     background-color: #20212b;
     color: black !important;
@@ -140,7 +142,7 @@ header email {
 section {
   width: 650px;
   float: right;
-  padding-top: 4.0em;
+  padding-top: 4em;
   padding-bottom: 50px;
 }
 
@@ -153,7 +155,7 @@ section h2 {
 }
 
 section p {
-  font-family: 'Crimson Pro', Georgia, serif;
+  font-family: "Crimson Pro", Georgia, serif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-color);
@@ -275,7 +277,6 @@ pubtitle a:hover {
 footer {
   width: 232px;
   float: left;
-  position: fixed;
   bottom: 30px;
   text-align: center;
 }
@@ -293,32 +294,34 @@ footer a {
 @media print, screen and (max-width: 960px) {
   .wrapper {
     width: auto;
-    margin: 0;
+    margin: 20px;
   }
-  
-  header, section, footer {
+
+  header,
+  section,
+  footer {
     float: none;
     position: static;
     width: auto;
   }
-  
+
   header {
     padding: 0;
   }
-  
+
   section {
     border: 1px solid var(--border-color);
     border-width: 1px 0;
     padding: 20px 0;
     margin: 0 0 20px;
   }
-  
+
   header .image.avatar img {
     border-radius: 100%;
     width: 117px;
     padding: 20px;
   }
-  
+
   .pub-item {
     display: flex;
     align-items: center;
@@ -329,12 +332,12 @@ footer a {
   .pub-item {
     display: block;
   }
-  
+
   .pub-image {
     width: 100%;
     max-width: 200px;
   }
-  
+
   header .image.avatar img {
     border-radius: 100%;
     width: 95px;
