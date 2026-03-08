@@ -11,5 +11,5 @@ Ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incidid
 ## Research Interests
 
 - Lorem ipsum dolor sit amet
-- Consectetur adipiscing elit  
+- Consectetur adipiscing elit
 - Sed do eiusmod tempor incididunt

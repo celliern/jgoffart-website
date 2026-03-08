@@ -50,6 +50,22 @@ export ORCID_ID=0000-0003-1234-8293
 - **Other (Blogs, Awards)**: Edit `content/other.md`
 - **Publications**: Managed via ORCID - edit `scripts/fetch_orcid.py` if needed
 
+#### Publication Images
+
+Both **working papers** and **publications** support images in their frontmatter. You can use either:
+
+- **Local images**: Store in `static/` directory and reference with relative path
+  ```yaml
+  [extra]
+  image = "images/paper-thumbnail.png"
+  ```
+
+- **Remote URLs**: Use full HTTPS URLs for images hosted externally
+  ```yaml
+  [extra]
+  image = "https://example.com/paper-thumbnail.png"
+  ```
+
 ### 3. Edit Templates
 
 - **Layout**: Edit `templates/base.html`
